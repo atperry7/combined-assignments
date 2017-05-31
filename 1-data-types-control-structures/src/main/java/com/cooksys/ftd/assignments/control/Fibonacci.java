@@ -100,11 +100,9 @@ public class Fibonacci {
         
         int[] countsResults = null;
         //Create the array based on the count size
-        if(count != 0) {
-        	countsResults = new int[count];
-        } else {
-        	countsResults = new int[count];
-        }
+       
+        countsResults = new int[count];
+        
         
         
         //Calculate the fibonnacci based the numbers leading to the count
