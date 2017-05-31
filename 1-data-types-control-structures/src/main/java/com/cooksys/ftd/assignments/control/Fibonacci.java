@@ -109,7 +109,7 @@ public class Fibonacci {
         
         //Calculate the fibonnacci based the numbers leading to the count
         
-        for (int i = count; i > 0; i--) {
+        for (int i = count - 1; i > 0; i--) {
      		countsResults[i] = atIndex(i);
      	}
         
