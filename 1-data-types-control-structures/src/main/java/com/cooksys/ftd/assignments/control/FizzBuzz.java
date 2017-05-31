@@ -1,5 +1,7 @@
 package com.cooksys.ftd.assignments.control;
 
+import org.junit.internal.Throwables;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -26,7 +28,12 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if b is zero
      */
     public static boolean divides(int a, int b) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	//Checks for zero and also if the number is divisible by each other
+        if (b == 0) {
+			throw new IllegalArgumentException();
+		}
+    	
+    	return a % b == 0;
     }
 
     /**
@@ -41,7 +48,20 @@ public class FizzBuzz {
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
     public static String message(int n) {
-        throw new NotImplementedException();
+        String fizzBuzz = ": FizzBuzz";
+        String fizz = ": Fizz";
+        String buzz = ": Buzz";
+        
+        //Checks first for divisible by both, then by 5, then by 3, or else returns null
+    	if (divides(n, 5) && divides(n, 3)) {
+			return n + fizzBuzz;
+		} else if (divides(n, 5)) {
+			return n + buzz;
+		} else if (divides(n, 3)) {
+			return n + fizz;
+		} else {
+			return null;
+		}
     }
 
     /**
@@ -55,7 +75,32 @@ public class FizzBuzz {
      * @throws IllegalArgumentException if the given end is less than the given start
      */
     public static String[] messages(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if (end < start) {
+			throw new IllegalArgumentException();
+		}
+    	
+    	String[] fizzBuzzResults = new String[end];
+    	
+    	//Loops through the first time and retrieves all values for given range if any
+    	int indexOfResults = 0;
+    	for (int i = start; i <= end - 1 ; i++) {
+			String fizzBuzzCheck = message(i);
+			
+			if (fizzBuzzCheck != null && start != end) {
+				fizzBuzzResults[indexOfResults] = fizzBuzzCheck;
+				indexOfResults++;
+			}
+		}
+    	
+    	//Creates a resized array based on actual results
+    	String[] fizzBuzzFinalResults = new String[indexOfResults];
+    	for (int i = 0; i < fizzBuzzResults.length; i++) {
+			if (fizzBuzzResults[i] != null) {
+				fizzBuzzFinalResults[i] = fizzBuzzResults[i];
+			}
+		}
+    	
+    	return fizzBuzzFinalResults;
     }
 
     /**
@@ -63,7 +108,11 @@ public class FizzBuzz {
      * the relevant messages to sysout
      */
     public static void main(String[] args) {
-        throw new NotImplementedException();
+        String[] results = messages(1, 115);
+        
+        for (int i = 0; i < results.length; i++) {
+			System.out.println(results[i]);
+		}
     }
 
 }

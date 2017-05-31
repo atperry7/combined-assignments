@@ -24,7 +24,29 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given index is less than zero
      */
     public static int atIndex(int i) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        //Check if index is less than 0
+    	if (i < 0) {
+			throw new IllegalArgumentException();
+		}
+        
+    	//Check if index is 0 or 1
+        if (i == 0 || i == 1) {
+			return 1;
+		}
+        
+        //Calculate fibonacci
+        int previous = 0;
+        int next = 1;
+        int result = 0;
+        
+        for (int j = 0; j < i; j++) {
+            result = previous + next;
+            previous = next;
+            next = result;
+        }
+        
+        return result;
+        
     }
 
     /**
@@ -38,7 +60,24 @@ public class Fibonacci {
      *                                  given end is less than the given start
      */
     public static int[] slice(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (start < 0 || end < 0 || end < start) {
+			throw new IllegalArgumentException();
+		}
+        //Creates the array
+        int[] results = null;
+        
+        //Make sure not to create an negative bound array
+        if (end - start != 0) {
+        	results = new int[end - 1];
+		}
+         
+        //Gets results for the given sequence of numbers
+        for (int i = 0; i < end - 1; i++) {
+			results[i] = atIndex(start);
+			start++;
+		}
+        
+        return results;
     }
 
     /**
@@ -49,6 +88,19 @@ public class Fibonacci {
      * @throws IllegalArgumentException if the given count is negative
      */
     public static int[] fibonacci(int count) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        if (count < 0) {
+			throw new IllegalArgumentException();
+		}
+        //Create the array based on the count size
+        int[] countsResults = new int[count];
+        
+        //Calculate the fibonnacci based the numbers leading to the count
+        for (int i = 0; i <= count; i++) {
+			countsResults = fibonacci(i);
+		}
+        
+        return countsResults;
+        
+        
     }
 }
