@@ -63,19 +63,25 @@ public class Fibonacci {
         if (start < 0 || end < 0 || end < start) {
 			throw new IllegalArgumentException();
 		}
-        //Creates the array
+        //Gets size and initializes a array to work with
+        int sizeOfArray = end - start;
         int[] results = null;
         
-        //Make sure not to create an negative bound array
-        if (end - start != 0) {
-        	results = new int[end - 1];
+        //Double checks the array size
+        if (sizeOfArray <= 0) {
+			results = new int[0];
+		} else {
+			results = new int[sizeOfArray];
 		}
-         
-        //Gets results for the given sequence of numbers
-        for (int i = 0; i < end - 1; i++) {
-			results[i] = atIndex(start);
-			start++;
-		}
+
+        //As long as the array isn't length of zero then calculate 
+        if (results.length != 0) {
+        	for (int i = 0; i < results.length; i++) {
+    			results[i] = atIndex(start);
+    			start++;
+    		}
+        }
+        
         
         return results;
     }
@@ -91,13 +97,23 @@ public class Fibonacci {
         if (count < 0) {
 			throw new IllegalArgumentException();
 		}
+        
+        int[] countsResults = null;
         //Create the array based on the count size
-        int[] countsResults = new int[count];
+        if(count != 0) {
+        	countsResults = new int[count];
+        } else {
+        	countsResults = new int[count];
+        }
+        
         
         //Calculate the fibonnacci based the numbers leading to the count
-        for (int i = 0; i <= count; i++) {
-			countsResults = fibonacci(i);
-		}
+        
+        for (int i = count; i > 0; i--) {
+     		countsResults[i] = atIndex(i);
+     	}
+        
+       
         
         return countsResults;
         
