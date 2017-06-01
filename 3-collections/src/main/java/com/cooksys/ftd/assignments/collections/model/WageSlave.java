@@ -1,15 +1,21 @@
 package com.cooksys.ftd.assignments.collections.model;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class WageSlave implements Capitalist {
+	
+	private String name;
+	private int salary;
+	private FatCat fatCat;
+
 
     public WageSlave(String name, int salary) {
-        throw new NotImplementedException();
+        this.name = name;
+        this.salary = salary;
     }
 
     public WageSlave(String name, int salary, FatCat owner) {
-        throw new NotImplementedException();
+        this.name = name;
+        this.salary = salary;
+        this.fatCat = owner;
     }
 
     /**
@@ -17,7 +23,7 @@ public class WageSlave implements Capitalist {
      */
     @Override
     public String getName() {
-        throw new NotImplementedException();
+        return this.name;
     }
 
     /**
@@ -25,7 +31,7 @@ public class WageSlave implements Capitalist {
      */
     @Override
     public int getSalary() {
-        throw new NotImplementedException();
+        return this.salary;
     }
 
     /**
@@ -33,7 +39,11 @@ public class WageSlave implements Capitalist {
      */
     @Override
     public boolean hasParent() {
-        throw new NotImplementedException();
+        if (fatCat != null) {
+			return true;
+		}
+        
+        return false;
     }
 
     /**
@@ -41,6 +51,28 @@ public class WageSlave implements Capitalist {
      */
     @Override
     public FatCat getParent() {
-        throw new NotImplementedException();
+    	if (hasParent()) {
+			return this.fatCat;
+		}
+    	
+        return null;
     }
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof WageSlave) {
+			WageSlave wageSlaveEquals = (WageSlave) obj;
+			
+			if (wageSlaveEquals.getSalary() == this.getSalary() 
+					&& wageSlaveEquals.getName() == this.getName() 
+					&& wageSlaveEquals.getParent() == this.getParent()) {
+				return true;
+			}
+			
+		}
+		
+		return false;
+	}
+    
+    
 }

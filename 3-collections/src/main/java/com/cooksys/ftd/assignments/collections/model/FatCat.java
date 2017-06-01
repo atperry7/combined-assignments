@@ -3,13 +3,21 @@ package com.cooksys.ftd.assignments.collections.model;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class FatCat implements Capitalist {
+	
+	private String name;
+	private int salary;
+	private FatCat fatCat;
 
     public FatCat(String name, int salary) {
-        throw new NotImplementedException();
+        this.name = name;
+        this.salary = salary;
     }
 
     public FatCat(String name, int salary, FatCat owner) {
-        throw new NotImplementedException();
+        this.name = name;
+        this.salary = salary;
+        this.fatCat = owner;
+        
     }
 
     /**
@@ -17,7 +25,7 @@ public class FatCat implements Capitalist {
      */
     @Override
     public String getName() {
-        throw new NotImplementedException();
+        return this.name;
     }
 
     /**
@@ -25,7 +33,7 @@ public class FatCat implements Capitalist {
      */
     @Override
     public int getSalary() {
-        throw new NotImplementedException();
+        return this.salary;
     }
 
     /**
@@ -33,7 +41,11 @@ public class FatCat implements Capitalist {
      */
     @Override
     public boolean hasParent() {
-        throw new NotImplementedException();
+        if (fatCat != null) {
+			return true;
+		}
+        
+        return false;
     }
 
     /**
@@ -41,6 +53,29 @@ public class FatCat implements Capitalist {
      */
     @Override
     public FatCat getParent() {
-        throw new NotImplementedException();
+        if (hasParent()) {
+			return this.fatCat;
+		}
+        
+        return null;
     }
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof FatCat) {
+			FatCat fatCatEquals = (FatCat) obj;
+			
+			if (fatCatEquals.getName().equals(this.getName()) 
+					&& fatCatEquals.getSalary() == this.getSalary()
+					&& fatCatEquals.getParent() == this.getParent()) {
+				
+				return true;
+			}
+			
+		}
+		
+		return false;
+	}
+    
+    
 }
