@@ -55,6 +55,13 @@ public class SimplifiedRational implements IRational {
 		int results = gcd(Math.abs(numerator), Math.abs(denominator));
 		int[] simplified = new int[2];
 		
+		if (numerator == 0) {
+			simplified[0] = 0;
+			simplified[1] = 1;
+			return simplified;
+			
+		}
+		
 		// Places simplified version in array
 		simplified[0] = numerator / results;
 		simplified[1] = denominator / results;
