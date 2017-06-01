@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,10 +43,26 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public boolean add(Capitalist capitalist) {
-		if (!has(capitalist) && capitalist != null) {
-			capitalSet.add(capitalist);
-			return true;
-		}
+		
+		if (capitalist != null && !has(capitalist)) {
+			
+			if (capitalist.hasParent()) {
+				
+				if (!has(capitalist.getParent())) {
+					capitalSet.add(capitalist.getParent());
+					capitalSet.add(capitalist);
+					return true;
+				} else {
+					capitalSet.add(capitalist);
+					return true;
+				}
+					
+			} else if (capitalist instanceof FatCat) {
+				capitalSet.add(capitalist);
+				return true;
+			}
+			
+		} 
 		
 		return false;
 	}
@@ -117,6 +134,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 		
 		return wageSlaveSet;
 	}
+	
 
 	/**
 	 * @return a map in which the keys represent the parent elements in the
@@ -148,7 +166,13 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public List<FatCat> getParentChain(Capitalist capitalist) {
-		List<FatCat> fatCatList = new ArrayList<>();
+		List<FatCat> fatCatList = new LinkedList<>();
+		FatCat fatCat = capitalist.getParent();
+		
+		while (fatCat.hasParent() && fatCat != null) {
+			fatCatList.add(fatCat.getParent());
+			fatCat = fatCat.getParent();
+		}
 		
 		return fatCatList;
 	}
