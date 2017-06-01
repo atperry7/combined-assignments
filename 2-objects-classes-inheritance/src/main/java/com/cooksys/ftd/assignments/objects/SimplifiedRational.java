@@ -1,5 +1,7 @@
 package com.cooksys.ftd.assignments.objects;
 
+import org.junit.internal.Throwables;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class SimplifiedRational implements IRational {
@@ -23,14 +25,9 @@ public class SimplifiedRational implements IRational {
 			throw new IllegalArgumentException();
 		}
 
-		// Runs until one of them is 0
-		while (a != 0 && b != 0) {
-			int c = b;
-			b = a % b;
-			a = c;
-		}
-
-		return a + b;
+		if (b==0) return a;
+		
+		return gcd(b, a % b);
 	}
 
 	/**
@@ -52,7 +49,7 @@ public class SimplifiedRational implements IRational {
 			throw new IllegalArgumentException();
 		}
 		// Gets the greatest common denominator to simplify with
-		int results = gcd(numerator, denominator);
+		int results = gcd(Math.abs(numerator), Math.abs(denominator));
 		int[] simplified = new int[2];
 		
 		// Places in array
@@ -82,15 +79,10 @@ public class SimplifiedRational implements IRational {
 			throw new IllegalArgumentException();
 		}
 
-		if (numerator == 0) {
-			this.denominator = denominator;
-			this.numerator = numerator;
-		} else {
-			int[] simplified = simplify(numerator, denominator);
-			this.denominator = simplified[1];
-			this.numerator = simplified[0];
-
-		}
+		int[] simplified = simplify(numerator, denominator);
+		
+		this.numerator = simplified[0];
+		this.denominator = simplified[1];
 
 	}
 
