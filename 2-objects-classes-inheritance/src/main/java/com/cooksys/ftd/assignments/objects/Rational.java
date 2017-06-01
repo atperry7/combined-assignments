@@ -109,11 +109,11 @@ public class Rational implements IRational {
 	 */
 	@Override
 	public String toString() {
-		
+		//Finds the negative values to correctly display a negative
 		if (getNumerator() < 0 != getDenominator() < 0) {
 			return "-" + Math.abs(getNumerator()) + "/" + Math.abs(getDenominator());
 		}
-		
+		//Uses Math.abs() in case both are negative
 		return Math.abs(getNumerator()) + "/" + Math.abs(getDenominator());
 		
 

@@ -24,8 +24,11 @@ public class SimplifiedRational implements IRational {
 		if (a <= 0 || b < 0) {
 			throw new IllegalArgumentException();
 		}
-
-		if (b==0) return a;
+		//Uses Euclid's method with recursion
+		//Checks the denominator and if it is zero simply returns back a (numerator)
+		if (b == 0) {
+			return a;
+		}
 		
 		return gcd(b, a % b);
 	}
@@ -48,11 +51,11 @@ public class SimplifiedRational implements IRational {
 		if (denominator == 0) {
 			throw new IllegalArgumentException();
 		}
-		// Gets the greatest common denominator to simplify with
+		// Gets the greatest common denominator to simplify the numerator and denominator
 		int results = gcd(Math.abs(numerator), Math.abs(denominator));
 		int[] simplified = new int[2];
 		
-		// Places in array
+		// Places simplified version in array
 		simplified[0] = numerator / results;
 		simplified[1] = denominator / results;
 
@@ -78,7 +81,8 @@ public class SimplifiedRational implements IRational {
 		if (denominator == 0) {
 			throw new IllegalArgumentException();
 		}
-
+		
+		//Simplifies the numerator and denominator
 		int[] simplified = simplify(numerator, denominator);
 		
 		this.numerator = simplified[0];
