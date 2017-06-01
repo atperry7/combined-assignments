@@ -39,9 +39,6 @@ interface IRational {
 	 * @return the negation of this
 	 */
 	default IRational negate() {
-		if (getNumerator() < 0 != getDenominator() < 0) {
-			return construct(Math.abs(getNumerator()), Math.abs(getDenominator()));
-		}
 		int n = getNumerator() * -1;
 		return construct(n, getDenominator());
 	}
@@ -78,8 +75,15 @@ interface IRational {
 		if (that == null) {
 			throw new IllegalArgumentException();
 		}
+		int n1 = this.getNumerator();
+		int d1 = this.getDenominator();
+		int n2 = that.getNumerator();
+		int d2 = that.getDenominator();
 		
-		return that;
+		int totalN = ((n1 * d2) + (n2 * d1));
+		int totalD = (d1 * d2);
+		
+		return construct(totalN, totalD);
 	}
 
 	/**
@@ -97,8 +101,15 @@ interface IRational {
 		if (that == null) {
 			throw new IllegalArgumentException();
 		}
+		int n1 = this.getNumerator();
+		int d1 = this.getDenominator();
+		int n2 = that.getNumerator();
+		int d2 = that.getDenominator();
 		
-		return that;
+		int totalN = ((n1 * d2) - (n2 * d1));
+		int totalD = (d1 * d2);
+		
+		return construct(totalN, totalD);
 	}
 
 	/**
@@ -116,8 +127,15 @@ interface IRational {
 		if (that == null) {
 			throw new IllegalArgumentException();
 		}
+		int n1 = this.getNumerator();
+		int d1 = this.getDenominator();
+		int n2 = that.getNumerator();
+		int d2 = that.getDenominator();
 		
-		return that;
+		int totalN = (n1 * n2);
+		int totalD = (d1 * d2);
+		
+		return construct(totalN, totalD);
 	}
 
 	/**
@@ -132,10 +150,17 @@ interface IRational {
 	 *             if that is null or if the numerator of that is 0
 	 */
 	default IRational div(IRational that) throws IllegalArgumentException {
-		if (that == null) {
+		if (that == null || that.getNumerator() == 0) {
 			throw new IllegalArgumentException();
 		}
+		int n1 = this.getNumerator();
+		int d1 = this.getDenominator();
+		int n2 = that.getNumerator();
+		int d2 = that.getDenominator();
 		
-		return that;
+		int totalN = (n1 * d2);
+		int totalD = (d1 * n2);
+		
+		return construct(totalN, totalD);
 	}
 }
