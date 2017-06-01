@@ -1,5 +1,7 @@
 package com.cooksys.ftd.assignments.objects;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import org.junit.internal.Throwables;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -28,9 +30,10 @@ public class Rational implements IRational {
 		if (denominator == 0) {
 			throw new IllegalArgumentException();
 		}
-
-		this.numerator = numerator;
+		
 		this.denominator = denominator;
+		this.numerator = numerator;
+		
 	}
 
 	/**
@@ -83,13 +86,15 @@ public class Rational implements IRational {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this.equals(obj)) {
+		if (obj instanceof Rational) {
 			Rational rational = (Rational) obj;
-			if (rational.getNumerator() == this.numerator && rational.getDenominator() == this.denominator) {
+			
+			if (rational.getDenominator() == this.getDenominator() 
+					&& rational.getNumerator() == this.getNumerator()) {
 				return true;
 			}
 		}
-
+		
 		return false;
 	}
 
@@ -104,13 +109,13 @@ public class Rational implements IRational {
 	 */
 	@Override
 	public String toString() {
-
-		String negativeNumber = "-" + Math.abs(this.numerator) + "/" + Math.abs(this.denominator);
-
-		if (numerator < 0 || denominator < 0) {
-			return negativeNumber;
+		
+		if (getNumerator() < 0 != getDenominator() < 0) {
+			return "-" + Math.abs(getNumerator()) + "/" + Math.abs(getDenominator());
 		}
+		
+		return Math.abs(getNumerator()) + "/" + Math.abs(getDenominator());
+		
 
-		return numerator + "/" + denominator;
 	}
 }
