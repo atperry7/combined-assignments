@@ -1,7 +1,5 @@
 package com.cooksys.ftd.assignments.collections.model;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class FatCat implements Capitalist {
 	
 	private String name;
@@ -61,21 +59,40 @@ public class FatCat implements Capitalist {
     }
 
 	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof FatCat) {
-			FatCat fatCatEquals = (FatCat) obj;
-			
-			if (fatCatEquals.getName().equals(this.getName()) 
-					&& fatCatEquals.getSalary() == this.getSalary()
-					&& fatCatEquals.getParent() == this.getParent()) {
-				
-				return true;
-			}
-			
-		}
-		
-		return false;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fatCat == null) ? 0 : fatCat.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + salary;
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FatCat other = (FatCat) obj;
+		if (fatCat == null) {
+			if (other.fatCat != null)
+				return false;
+		} else if (!fatCat.equals(other.fatCat))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (salary != other.salary)
+			return false;
+		return true;
+	}
+
+	
     
     
 }

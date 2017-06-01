@@ -59,20 +59,40 @@ public class WageSlave implements Capitalist {
     }
 
 	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof WageSlave) {
-			WageSlave wageSlaveEquals = (WageSlave) obj;
-			
-			if (wageSlaveEquals.getSalary() == this.getSalary() 
-					&& wageSlaveEquals.getName() == this.getName() 
-					&& wageSlaveEquals.getParent() == this.getParent()) {
-				return true;
-			}
-			
-		}
-		
-		return false;
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fatCat == null) ? 0 : fatCat.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + salary;
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		WageSlave other = (WageSlave) obj;
+		if (fatCat == null) {
+			if (other.fatCat != null)
+				return false;
+		} else if (!fatCat.equals(other.fatCat))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (salary != other.salary)
+			return false;
+		return true;
+	}
+
+	
     
     
 }
