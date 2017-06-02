@@ -14,7 +14,7 @@ import com.cooksys.ftd.assignments.collections.model.FatCat;
 
 public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 
-	Set<Capitalist> capitalSet = new HashSet<>();
+	private Set<Capitalist> capitalSet = new HashSet<>();
 	/**
 	 * Adds a given element to the hierarchy.
 	 * <p>
