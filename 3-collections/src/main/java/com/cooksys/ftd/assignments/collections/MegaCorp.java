@@ -71,11 +71,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public boolean has(Capitalist capitalist) {
-		if (capitalSet.contains(capitalist)) {
-			return true;
-		}
-
-		return false;
+		return capitalSet.contains(capitalist);
 	}
 
 	/**
@@ -84,7 +80,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public Set<Capitalist> getElements() {
-		// Passes out a new Set
+		// Passes out a new Set that doesn't reference the capitalSet for structure
 		Set<Capitalist> newSet = new HashSet<>();
 		if (!capitalSet.isEmpty()) {
 			newSet.addAll(capitalSet);
@@ -170,6 +166,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	@Override
 	public List<FatCat> getParentChain(Capitalist capitalist) {
 		List<FatCat> fatCatList = new LinkedList<>();
+		
 		if (capitalist == null) {
 			return fatCatList;
 		}
