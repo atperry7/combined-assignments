@@ -1,7 +1,5 @@
 package com.cooksys.ftd.assignments.collections;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
