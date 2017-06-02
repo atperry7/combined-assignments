@@ -36,15 +36,13 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public boolean add(Capitalist capitalist) {
-		//Checks for null OR if the capitalist already exists
-		if (capitalist == null || this.has(capitalist)) {
-			return false;
-		}
+		//Checks for null OR if the capitalist already exists 
 		//Checks if it is not an instance of FatCat and if the capitalist does not have a parent
-		if (!(capitalist instanceof FatCat) && !capitalist.hasParent()) {
+		if (capitalist == null || this.has(capitalist) 
+				|| (!(capitalist instanceof FatCat) && !capitalist.hasParent())) {
 			return false;
 		}
-		
+
 		//Checks the capitalists for parents and if the parent is already in the structure else if it does have capitalist parent
 		//and capitalist parent is in the data structure then adds
 		if (capitalist.hasParent() && !this.has(capitalist.getParent())) {
@@ -80,13 +78,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public Set<Capitalist> getElements() {
-		// Passes out a new Set that doesn't reference the capitalSet for structure
-		Set<Capitalist> newSet = new HashSet<>();
-		if (!capitalSet.isEmpty()) {
-			newSet.addAll(capitalSet);
-		}
-
-		return newSet;
+		return new HashSet<>(capitalSet);
 	}
 
 	/**
@@ -104,7 +96,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 				catParents.add((FatCat) capitalist);
 			}
 		}
-
+		
 		return catParents;
 
 	}

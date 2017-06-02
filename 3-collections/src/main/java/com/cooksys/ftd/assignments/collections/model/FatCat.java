@@ -39,11 +39,7 @@ public class FatCat implements Capitalist {
      */
     @Override
     public boolean hasParent() {
-        if (fatCat != null) {
-			return true;
-		}
-        
-        return false;
+        return fatCat != null;
     }
 
     /**
@@ -51,11 +47,7 @@ public class FatCat implements Capitalist {
      */
     @Override
     public FatCat getParent() {
-        if (hasParent()) {
-			return this.fatCat;
-		}
-        
-        return null;
+        return hasParent() ? this.fatCat : null;
     }
 
 	@Override
