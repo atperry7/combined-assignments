@@ -17,7 +17,6 @@ import com.cooksys.ftd.assignments.collections.model.FatCat;
 public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 
 	Set<Capitalist> capitalSet = new HashSet<>();
-
 	/**
 	 * Adds a given element to the hierarchy.
 	 * <p>
@@ -39,21 +38,29 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public boolean add(Capitalist capitalist) {
-		if (capitalist == null) { return false; }
-		if (this.has(capitalist)) { return false; }
-		if (!(capitalist instanceof FatCat) && !capitalist.hasParent()) { return false; }
-		
+		if (capitalist == null) {
+			return false;
+		}
+		if (this.has(capitalist)) {
+			return false;
+		}
+		if (!(capitalist instanceof FatCat) && !capitalist.hasParent()) {
+			return false;
+		}
+
 		if (capitalist.hasParent() && !this.has(capitalist.getParent())) {
 			add(capitalist.getParent());
 			capitalSet.add(capitalist);
 			return true;
+		} else if (capitalist.hasParent() && this.has(capitalist.getParent())) {
+			return capitalSet.add(capitalist);
 		}
-		
+
 		if (capitalist instanceof FatCat && !has(capitalist)) {
 			capitalSet.add(capitalist);
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -68,7 +75,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 		if (capitalSet.contains(capitalist)) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -116,8 +123,13 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public Set<Capitalist> getChildren(FatCat fatCat) {
-		HashSet<Capitalist> slaveSet = new HashSet<>();
+		Set<Capitalist> slaveSet = new HashSet<>();
 		Iterator<Capitalist> childerIter = capitalSet.iterator();
+		
+		//Returns empty set if parent is not in hierarchy
+		if (!has(fatCat)) {
+			return slaveSet;
+		}
 
 		while (childerIter.hasNext()) {
 			Capitalist capitalist = (Capitalist) childerIter.next();
@@ -159,14 +171,15 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	@Override
 	public List<FatCat> getParentChain(Capitalist capitalist) {
 		List<FatCat> fatCatList = new LinkedList<>();
+		if (capitalist == null) {
+			return fatCatList;
+		}
 
-		if (capitalist.hasParent()) {
-			FatCat fatCat = capitalist.getParent();
+		FatCat fatCat = capitalist.getParent();
 
-			while (fatCat != null) {
-				fatCatList.add(fatCat);
-				fatCat = fatCat.getParent();
-			}
+		while (fatCat != null && has(capitalist.getParent())) {
+			fatCatList.add(fatCat);
+			fatCat = fatCat.getParent();
 		}
 
 		return fatCatList;
