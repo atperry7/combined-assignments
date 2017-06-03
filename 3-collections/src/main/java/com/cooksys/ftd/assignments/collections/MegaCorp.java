@@ -1,15 +1,11 @@
 package com.cooksys.ftd.assignments.collections;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import com.cooksys.ftd.assignments.collections.hierarchy.Hierarchy;
 import com.cooksys.ftd.assignments.collections.model.Capitalist;
@@ -46,7 +42,8 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 			return false;
 		}
 
-		//Checks the capitalists for parents and if the parent is already in the structure else if it does have capitalist parent
+		//Checks the capitalists for parents and if the parent is already in the structure else 
+		//if it does have capitalist parent
 		//and capitalist parent is in the data structure then adds
 		if (capitalist.hasParent() && !this.has(capitalist.getParent())) {
 			add(capitalist.getParent());
@@ -134,13 +131,14 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 		
 		if (capitalist == null) {
 			return fatCatList;
-		}
-
-		FatCat fatCat = capitalist.getParent();
-
-		while (fatCat != null && has(capitalist.getParent())) {
-			fatCatList.add(fatCat);
-			fatCat = fatCat.getParent();
+			
+		} else if (capitalist.hasParent()) {
+			FatCat fatCat = capitalist.getParent();
+			
+			while (fatCat != null && has(capitalist.getParent())) {
+				fatCatList.add(fatCat);
+				fatCat = fatCat.getParent();
+			}
 		}
 
 		return fatCatList;
