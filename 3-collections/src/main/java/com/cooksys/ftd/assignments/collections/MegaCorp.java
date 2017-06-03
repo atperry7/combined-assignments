@@ -50,15 +50,13 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 		//and capitalist parent is in the data structure then adds
 		if (capitalist.hasParent() && !this.has(capitalist.getParent())) {
 			add(capitalist.getParent());
-			capitalSet.add(capitalist);
-			return true;
+			return capitalSet.add(capitalist);
 		} else if (capitalist.hasParent() && this.has(capitalist.getParent())) {
 			return capitalSet.add(capitalist);
 		}
 		//Checks for any lone wolf FatCats that don't have parents and that are not in the data structure
 		if (capitalist instanceof FatCat && !has(capitalist)) {
-			capitalSet.add(capitalist);
-			return true;
+			return capitalSet.add(capitalist);
 		}
 
 		return false;
@@ -107,7 +105,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	@Override
 	public Set<Capitalist> getChildren(FatCat fatCat) {
 		return capitalSet.stream()
-				.filter(capitalist -> capitalist.getParent() == fatCat)
+				.filter(capitalist -> fatCat.equals(capitalist.getParent()))
 				.collect(Collectors.toSet());
 	}
 
@@ -118,17 +116,9 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public Map<FatCat, Set<Capitalist>> getHierarchy() {
-		Map<FatCat, Set<Capitalist>> mapHierarchy = new HashMap<>();
-		Set<FatCat> fatCatsToTest = getParents();
-		Iterator<FatCat> fatIterator = fatCatsToTest.iterator();
-
-		while (fatIterator.hasNext()) {
-			FatCat fatCat = (FatCat) fatIterator.next();
-			mapHierarchy.put(fatCat, getChildren(fatCat));
-
-		}
-
-		return mapHierarchy;
+		return getParents().parallelStream().collect(Collectors.toMap(
+				fatCat -> (FatCat) fatCat, 
+				fatCat -> getChildren(fatCat)));
 	}
 
 	/**
