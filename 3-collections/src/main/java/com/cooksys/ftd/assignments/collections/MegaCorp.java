@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.cooksys.ftd.assignments.collections.hierarchy.Hierarchy;
 import com.cooksys.ftd.assignments.collections.model.Capitalist;
@@ -87,17 +90,10 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public Set<FatCat> getParents() {
-		Iterator<Capitalist> capIter = capitalSet.iterator();
-		HashSet<FatCat> catParents = new HashSet<>();
-
-		while (capIter.hasNext()) {
-			Capitalist capitalist = (Capitalist) capIter.next();
-			if (capitalist.getClass() == FatCat.class) {
-				catParents.add((FatCat) capitalist);
-			}
-		}
-		
-		return catParents;
+		return capitalSet.stream()
+				.filter(capitalist -> capitalist instanceof FatCat)
+				.map(cap -> (FatCat) cap)
+				.collect(Collectors.toSet());
 
 	}
 
@@ -110,22 +106,9 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	 */
 	@Override
 	public Set<Capitalist> getChildren(FatCat fatCat) {
-		Set<Capitalist> slaveSet = new HashSet<>();
-		Iterator<Capitalist> childerIter = capitalSet.iterator();
-		
-		//Returns empty set if parent is not in hierarchy
-		if (!has(fatCat)) {
-			return slaveSet;
-		}
-
-		while (childerIter.hasNext()) {
-			Capitalist capitalist = (Capitalist) childerIter.next();
-			if (capitalist.getParent() == fatCat) {
-				slaveSet.add(capitalist);
-			}
-		}
-
-		return slaveSet;
+		return capitalSet.stream()
+				.filter(capitalist -> capitalist.getParent() == fatCat)
+				.collect(Collectors.toSet());
 	}
 
 	/**
