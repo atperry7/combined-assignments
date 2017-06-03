@@ -52,7 +52,6 @@ public class SimplifiedRational implements IRational {
 			throw new IllegalArgumentException();
 		}
 		// Gets the greatest common denominator to simplify the numerator and denominator
-		int results = gcd(Math.abs(numerator), Math.abs(denominator));
 		int[] simplified = new int[2];
 		
 		if (numerator == 0) {
@@ -61,6 +60,8 @@ public class SimplifiedRational implements IRational {
 			return simplified;
 			
 		}
+		
+		int results = gcd(Math.abs(numerator), Math.abs(denominator));
 		
 		// Places simplified version in array
 		simplified[0] = numerator / results;
