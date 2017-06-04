@@ -136,10 +136,11 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 			return fatCatList;
 		} else if (capitalist.hasParent()) {
 			FatCat fatCat = capitalist.getParent();
+			fatCatList.add(fatCat);
 
-			while (fatCat != null && has(capitalist.getParent())) {
-				fatCatList.add(fatCat);
+			while (fatCat != null && has(fatCat.getParent())) {
 				fatCat = fatCat.getParent();
+				fatCatList.add(fatCat);
 			}
 		}
 
