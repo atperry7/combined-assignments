@@ -14,43 +14,46 @@ import com.cooksys.ftd.assignments.socket.model.Student;
 
 public class Client {
 
-    /**
-     * The client should load a {@link com.cooksys.ftd.assignments.socket.model.Config} object from the
-     * <project-root>/config/config.xml path, using the "port" and "host" properties of the embedded
-     * {@link com.cooksys.ftd.assignments.socket.model.RemoteConfig} object to create a socket that connects to
-     * a {@link Server} listening on the given host and port.
-     *
-     * The client should expect the server to send a {@link com.cooksys.ftd.assignments.socket.model.Student} object
-     * over the socket as xml, and should unmarshal that object before printing its details to the console.
-     */
-    private static final String  CONFIG_FILE_PATH = "C:/Users/ftd-6/workspace/combined-assignments/5-socket-io-serialization/config/config.xml";
+	/**
+	 * The client should load a
+	 * {@link com.cooksys.ftd.assignments.socket.model.Config} object from the
+	 * <project-root>/config/config.xml path, using the "port" and "host"
+	 * properties of the embedded
+	 * {@link com.cooksys.ftd.assignments.socket.model.RemoteConfig} object to
+	 * create a socket that connects to a {@link Server} listening on the given
+	 * host and port.
+	 *
+	 * The client should expect the server to send a
+	 * {@link com.cooksys.ftd.assignments.socket.model.Student} object over the
+	 * socket as xml, and should unmarshal that object before printing its
+	 * details to the console.
+	 */
+	private static final String CONFIG_FILE_PATH = "C:/Users/ftd-6/workspace/combined-assignments/5-socket-io-serialization/config/config.xml";
 
-	
-    public static void main(String[] args) {
-        Config config = null;
-    	
-    	try {
+	public static void main(String[] args) {
+		Config config = null;
+
+		try {
 			config = Utils.loadConfig(CONFIG_FILE_PATH, Utils.createJAXBContext());
 		} catch (FileNotFoundException | JAXBException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    	try (Socket socket = new Socket(config.getRemote().getHost(), config.getRemote().getPort())) {
-			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+		try ( // Connects to the server and then uses the BufferedReader to read
+				// in the data pushed from the server
+				Socket socket = new Socket(config.getRemote().getHost(), config.getRemote().getPort());
+				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) {
+			//Sets up UnMarshallers
 			Unmarshaller unmarshaller = Utils.createJAXBContext().createUnmarshaller();
-			
-    		Student student = (Student) unmarshaller.unmarshal(in);
-    		System.out.println(student);
-    		
+			//Reads the data that was pushed in from the BufferedReader
+			Student student = (Student) unmarshaller.unmarshal(in);
+			System.out.println(student);
+
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    	
-    }
+
+	}
 }

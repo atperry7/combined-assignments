@@ -60,7 +60,6 @@ public class Server extends Utils {
     	try {
 			config = Utils.loadConfig(CONFIG_FILE_PATH, Utils.createJAXBContext());
 		} catch (JAXBException | FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
