@@ -1,9 +1,8 @@
 package com.cooksys.ftd.assignments.socket;
 
-import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
 import javax.xml.bind.JAXBException;
@@ -38,15 +37,15 @@ public class Client {
 			e.printStackTrace();
 		}
 
-		try ( // Connects to the server and then uses the BufferedReader to read
-				// in the data pushed from the server
+		try ( // Connects to the server and then uses the BufferedReader to read in the data pushed from the server
 				Socket socket = new Socket(config.getRemote().getHost(), config.getRemote().getPort());
-				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));) {
+				DataInputStream in = new DataInputStream(socket.getInputStream())) {
 			//Sets up UnMarshallers
 			Unmarshaller unmarshaller = Utils.createJAXBContext().createUnmarshaller();
 			//Reads the data that was pushed in from the BufferedReader
 			Student student = (Student) unmarshaller.unmarshal(in);
 			System.out.println(student);
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();

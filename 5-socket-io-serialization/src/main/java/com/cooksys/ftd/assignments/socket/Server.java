@@ -1,9 +1,9 @@
 package com.cooksys.ftd.assignments.socket;
 
+import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -64,20 +64,20 @@ public class Server extends Utils {
     	
     	try (ServerSocket serverSocket = new ServerSocket(config.getLocal().getPort());
     			Socket clientSocket = serverSocket.accept();
-    			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
+    			DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream())) {
 
     		//This UnMarshalls the student file
     		Student student = loadStudent(config.getStudentFilePath(), createJAXBContext());
     		
-    		//This Marshalls the student class and pushed the marshelled file over the server to the client
+    		//This Marshalls the student class and pushes the marshelled xml over the server to the client
     		Marshaller marshaller = createJAXBContext().createMarshaller();
     		marshaller.marshal(student, out);
-    		
-    		
-    		
+  		
     	} catch (IOException | JAXBException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			System.out.println("Server Closing");
 		}
     	
     	

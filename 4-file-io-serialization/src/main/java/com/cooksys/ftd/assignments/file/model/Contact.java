@@ -1,10 +1,26 @@
 package com.cooksys.ftd.assignments.file.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Contact {
+	
+	@XmlAttribute(name="first-name")
     private String firstName;
+	
+	@XmlAttribute(name="last-name")
     private String lastName;
+    
+	@XmlElement
     private String email;
-    private String phoneNumber;
+    
+	@XmlElement(name="phone-number")
+	private String phoneNumber;
 
     public String getFirstName() {
         return firstName;
@@ -37,4 +53,12 @@ public class Contact {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+	@Override
+	public String toString() {
+		return "Contact [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNumber="
+				+ phoneNumber + "]";
+	}
+    
+    
 }
