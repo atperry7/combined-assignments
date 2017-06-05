@@ -71,7 +71,7 @@ public class Server extends Utils {
     		//This UnMarshalls the student file
     		Student student = loadStudent(config.getStudentFilePath(), createJAXBContext());
     		
-    		//This Marshalls the student file and pushed the marshelled file over the server to the client
+    		//This Marshalls the student class and pushed the marshelled file over the server to the client
     		Marshaller marshaller = createJAXBContext().createMarshaller();
     		marshaller.marshal(student, out);
     		
