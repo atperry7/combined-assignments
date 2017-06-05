@@ -23,8 +23,7 @@ public class Utils {
      * @throws JAXBException 
      */
     public static JAXBContext createJAXBContext() throws JAXBException {
-    	JAXBContext jaxbContext = JAXBContext.newInstance(Config.class, LocalConfig.class, RemoteConfig.class, Student.class);
-        return jaxbContext;
+        return JAXBContext.newInstance(Config.class, LocalConfig.class, RemoteConfig.class, Student.class);
     }
 
     /**

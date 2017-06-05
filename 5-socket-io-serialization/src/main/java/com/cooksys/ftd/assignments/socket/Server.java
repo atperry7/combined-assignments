@@ -68,9 +68,10 @@ public class Server extends Utils {
     			Socket clientSocket = serverSocket.accept();
     			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
 
+    		//This UnMarshalls the student file
     		Student student = loadStudent(config.getStudentFilePath(), createJAXBContext());
     		
-    		System.out.println("Server UnMarshalling");
+    		//This Marshalls the student file and pushed the marshelled file over the server to the client
     		Marshaller marshaller = createJAXBContext().createMarshaller();
     		marshaller.marshal(student, out);
     		
