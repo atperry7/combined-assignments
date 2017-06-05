@@ -17,6 +17,11 @@ import com.cooksys.ftd.assignments.socket.model.Student;
  * Shared static methods to be used by both the {@link Client} and {@link Server} classes.
  */
 public class Utils {
+	
+	//Created for testing, used by both client and server for the location of the config.xml
+	public static final String CONFIG_FILE_PATH = "C:/Users/ftd-6/workspace/combined-assignments/5-socket-io-serialization/config/config.xml";
+
+	
     /**
      * @return a {@link JAXBContext} initialized with the classes in the
      * com.cooksys.socket.assignment.model package

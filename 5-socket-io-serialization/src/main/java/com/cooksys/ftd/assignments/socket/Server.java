@@ -52,13 +52,12 @@ public class Server extends Utils {
      *
      * Following this transaction, the server may shut down or listen for more connections.
      */
-    private static final String  CONFIG_FILE_PATH = "C:/Users/ftd-6/workspace/combined-assignments/5-socket-io-serialization/config/config.xml";
     
     public static void main(String[] args) {
     	Config config = null;
     	
     	try {
-			config = Utils.loadConfig(CONFIG_FILE_PATH, Utils.createJAXBContext());
+			config = Utils.loadConfig(Utils.CONFIG_FILE_PATH, Utils.createJAXBContext());
 		} catch (JAXBException | FileNotFoundException e) {
 			e.printStackTrace();
 		}

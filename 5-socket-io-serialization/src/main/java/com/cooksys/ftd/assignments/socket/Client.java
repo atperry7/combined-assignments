@@ -28,13 +28,12 @@ public class Client {
 	 * socket as xml, and should unmarshal that object before printing its
 	 * details to the console.
 	 */
-	private static final String CONFIG_FILE_PATH = "C:/Users/ftd-6/workspace/combined-assignments/5-socket-io-serialization/config/config.xml";
 
 	public static void main(String[] args) {
 		Config config = null;
 
 		try {
-			config = Utils.loadConfig(CONFIG_FILE_PATH, Utils.createJAXBContext());
+			config = Utils.loadConfig(Utils.CONFIG_FILE_PATH, Utils.createJAXBContext());
 		} catch (FileNotFoundException | JAXBException e) {
 			e.printStackTrace();
 		}
