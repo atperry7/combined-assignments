@@ -10,7 +10,9 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -158,7 +160,7 @@ public class Main {
 		session.setLocation(rootDirectory.getName());
 
 		// Create lists used for the following functions
-		List<Student> students = new ArrayList<>();
+		Set<Student> students = new HashSet<>();
 		List<String> fileNames = new ArrayList<>();
 		List<Path> paths = new ArrayList<>();
 
@@ -179,6 +181,7 @@ public class Main {
 						for (Path path : paths) {
 							students.add(readStudent(path.toFile(), jaxb));
 						}
+						break;
 					}
 
 					
@@ -193,7 +196,7 @@ public class Main {
 		}
 
 		session.setStartDate(fileNames.get(0));
-		session.setStudents(students);
+		session.setStudents(new ArrayList<Student>(students));
 
 		return session;
 	}
