@@ -37,15 +37,15 @@ public class Client {
 			e.printStackTrace();
 		}
 
-		try ( // Connects to the server and then uses the BufferedReader to read in the data pushed from the server
+		try ( // Connects to the server and then uses the BufferedReader to read
+				// in the data pushed from the server
 				Socket socket = new Socket(config.getRemote().getHost(), config.getRemote().getPort());
 				DataInputStream in = new DataInputStream(socket.getInputStream())) {
-			//Sets up UnMarshallers
+			// Sets up UnMarshallers
 			Unmarshaller unmarshaller = Utils.createJAXBContext().createUnmarshaller();
-			//Reads the data that was pushed in from the BufferedReader
+			// Reads the data that was pushed in from the BufferedReader
 			Student student = (Student) unmarshaller.unmarshal(in);
 			System.out.println(student);
-			
 
 		} catch (IOException e) {
 			e.printStackTrace();

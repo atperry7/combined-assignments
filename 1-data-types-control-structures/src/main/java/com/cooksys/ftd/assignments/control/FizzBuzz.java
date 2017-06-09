@@ -1,9 +1,5 @@
 package com.cooksys.ftd.assignments.control;
 
-import org.junit.internal.Throwables;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * FizzBuzz is an old programming exercise.
  * The goal is to iterate over a range of numbers and print a message about each number's divisibility.

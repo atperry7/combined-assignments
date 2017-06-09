@@ -1,11 +1,5 @@
 package com.cooksys.ftd.assignments.objects;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
-import org.junit.internal.Throwables;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class Rational implements IRational {
 
 	private int numerator;

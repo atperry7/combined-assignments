@@ -124,7 +124,6 @@ public class Main {
 				throw ex.getCause();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -181,6 +180,7 @@ public class Main {
 						for (Path path : paths) {
 							students.add(readStudent(path.toFile(), jaxb));
 						}
+						//Once we have the students no more directories to search
 						break;
 					}
 

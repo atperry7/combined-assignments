@@ -1,9 +1,5 @@
 package com.cooksys.ftd.assignments.objects;
 
-import org.junit.internal.Throwables;
-
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class SimplifiedRational implements IRational {
 
 	private int numerator;
